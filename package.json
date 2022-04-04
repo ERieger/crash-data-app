@@ -1,0 +1,22 @@
+{
+  "name": "crash-data-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ERieger/crash-data-app.git"
+  },
+  "author": "erieger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ERieger/crash-data-app/issues"
+  },
+  "homepage": "https://github.com/ERieger/crash-data-app#readme",
+  "dependencies": {
+    "sass": "^1.49.11"
+  }
+}
