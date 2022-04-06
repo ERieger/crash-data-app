@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass-watch": "sass --watch ./src/index.scss ./public/index.css"
+    "deploy": "sass ./src/index.scss ./public/index.css && scp -r ./public/ erieger@webhost1.concordia.sa.edu.au:~/www/"
   },
   "repository": {
     "type": "git",
