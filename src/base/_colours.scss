@@ -1,0 +1,30 @@
+// Defines standard colours used throughout the framework
+$white: #ffffff;
+$black: #000000;
+
+$primary: #087fff;
+$secondary:#afb1b4;
+$success: #5aa336;
+$danger: #cf3419;
+$warning: #e8ae25;
+$info: #3aa2d3;
+$light: #f8f7f7;
+$dark: #212529;
+
+$primary-light: lighten($primary, 20%);
+$secondary-light: lighten($secondary, 10%);
+$success-light: lighten($success, 15%);
+$danger-light: lighten($danger, 20%);
+$warning-light: lighten($warning, 20%);
+$info-light: lighten($info, 20%);
+$light-light: lighten($light, 20%);
+$dark-light: lighten($dark, 20%);
+
+$primary-dark: darken($primary, 15%);
+$secondary-dark: darken($secondary, 15%);
+$success-dark: darken($success, 10%);
+$danger-dark: darken($danger, 8%);
+$warning-dark: darken($warning, 8%);
+$info-dark: darken($info, 10%);
+$light-dark: darken($light, 10%);
+$dark-dark: darken($dark, 15%);
