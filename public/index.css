@@ -10,6 +10,8 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .page .nav {
   background-color: #087fff;
@@ -17,21 +19,31 @@
   flex-direction: row;
   align-items: center;
 }
-.page .nav img {
-  width: 5rem;
-  height: 5rem;
-  background-color: #f8f7f7;
-  border-radius: 1rem;
-  margin: 0.3rem;
+.page .nav form {
   margin-left: auto;
+  padding: 1rem;
 }
-.page .nav img:hover {
-  background-color: #e0dcdc;
+.page .nav form input {
+  font-size: 1rem;
+  color: #f8f7f7;
+}
+.page .nav form input #file-upload-button {
+  color: #212529;
 }
 .page .nav h1 {
   color: #f8f7f7;
 }
-
+.page .entry {
+  display: flex;
+  flex-direction: column;
+}
+.page .entry form {
+  display: inherit;
+  flex-direction: column;
+}
+.page .body {
+  display: flex;
+}
 h1 {
   padding: 1rem;
   font-size: 3.2rem;

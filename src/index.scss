@@ -12,6 +12,8 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 
     .nav {
         background-color: $primary;
@@ -20,22 +22,41 @@
         align-items: center;
         // align-content: center;
 
-        img {
-            width: 5rem;
-            height: 5rem;
-            background-color: $light;
-            border-radius: 1rem;
-            margin: .3rem;
+        form {
             margin-left: auto;
+            padding: 1rem;
 
-            &:hover {
-                background-color: $light-dark;
+            input {
+                font-size: 1rem;
+                color: $light;
+
+                #file-upload-button {
+                    color: $dark;
+                }
             }
         }
 
         h1 {
             color: $light;
         }
+    }
+
+    .entry {
+        display: flex;
+        flex-direction: column;
+        
+        form {
+            display: inherit;
+            flex-direction: column;
+        }
+    }
+
+    .body {
+        display: flex;
+    }
+
+    .body-container {
+
     }
 }
 
