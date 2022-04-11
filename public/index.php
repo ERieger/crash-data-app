@@ -2,6 +2,7 @@
 
 <head>
     <title>Crash Data Web Interface</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel=stylesheet href="index.css">
 </head>
 
@@ -17,26 +18,27 @@
             <div class="entry body-container">
                 <h2>Data Entry</h2>
                 <form action="crash_process.php" method="POST">
-                    <input type="date" name="date" id="cDate">
-                    <input type="time" name="time" id="cTime">
-                    <select name="Location" id="">
+                    <input type="date" name="date" id="date">
+                    <input type="time" name="time" id="time">
+                    <select name="location" id="location">
 
                     </select>
-                    <input type="number" name="Accloc_X" id="">
-                    <input type="number" name="Accloc_Y" id="">
-                    <input type="number" name="TotalCasualties" id="">
-                    <input type="number" name="TotalFatalities" id="">
-                    <input type="number" name="TotalSI" id="">
-                    <input type="number" name="TotalMI" id="">
-                    <input type="number" name="AreaSpeed" id="">
-                    <select name="PositionType" id="">
+                    <input type="number" name="accloc_x" id="accloc_x">
+                    <input type="number" name="accloc_y" id="accloc_y">
+                    <input type="number" name="totalCas" id="totalCas">
+                    <input type="number" name="totalFat" id="totalFat">
+                    <input type="number" name="totalSI" id="totalSI">
+                    <input type="number" name="totalMI" id="totalMI">
+                    <input type="number" name="areaSpeed" id="areaSpeed">
+                    <select name="posType" id="posType">
 
                     </select>
-                    <select name="CrashType" id="">
+                    <select name="crashType" id="crashType">
 
                     </select>
-                    <input type="checkbox" name="DUIInvolved" id="">
-                    <input type="checkbox" name="DrugsInvolved" id="">
+                    <span><p>DUI Involved</p><input type="checkbox" name="DUIInvolved" id="DUIInvolved"></span>
+                    <span><p>Drugs Involved</p><input type="checkbox" name="drugsInvolved" id="drugsInvolved"></span>
+                
                     <button type="submit">Submit</button>
                 </form>
             </div>

@@ -53,6 +53,20 @@
 
     .body {
         display: flex;
+        h2 {
+            font-size: 2.4rem;
+            margin: .8rem 1.3rem;
+        }
+
+        p {
+            font-size: 1rem;
+            padding: .5rem;
+        }
+        
+        input, select {
+            margin: .5rem;
+            font-size: 1rem;
+        }
     }
 
     .body-container {
