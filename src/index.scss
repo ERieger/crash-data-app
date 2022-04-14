@@ -65,12 +65,26 @@
         
         input, select {
             margin: .5rem;
-            font-size: 1rem;
+            font-size: 1.5rem;
+            padding: .4rem;
+
+            option {
+                font-size: 1.5rem;
+            }
         }
     }
 
     .body-container {
+        padding: 1rem;
+        margin: .5rem;
+    }
+}
 
+.check {
+    &-label {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
     }
 }
 
