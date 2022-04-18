@@ -9,7 +9,7 @@
 .page {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -40,6 +40,13 @@
 .page .entry form {
   display: inherit;
   flex-direction: column;
+}
+.page .output {
+  flex-grow: 1;
+}
+.page .output td, .page .output th {
+  font-size: 1.5rem;
+  text-align: center;
 }
 .page .body {
   display: flex;

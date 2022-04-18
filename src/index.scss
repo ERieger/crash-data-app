@@ -11,7 +11,7 @@
 .page {
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
 
@@ -48,6 +48,15 @@
         form {
             display: inherit;
             flex-direction: column;
+        }
+    }
+
+    .output {
+        flex-grow: 1;
+
+        td, th {
+            font-size: 1.5rem;
+            text-align: center;
         }
     }
 
