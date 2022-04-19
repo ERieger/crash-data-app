@@ -1,6 +1,8 @@
 <?php
 include('connect.php');
-$date = $_POST["date"];
+$day = $_POST["day"];
+$month = $_POST["month"];
+$year = $_POST["year"];
 $time = $_POST["time"];
 $location = $_POST["location"];
 $accloc_x = $_POST["accloc_x"];
@@ -32,8 +34,8 @@ function validate($data) {
     return $data;    
 }
 
-$SQL = "INSERT INTO `c_crash_data`(`date`, `time`, `locid`, `acclocx`, `acclocy`, `total_cas`, `total_fats`, `total_si`, `total_mi`, `area_speed`, `pos_type`, `crash_type`, `dui`, `drugs`) 
-VALUES('$date', '$time', $location, $accloc_x, $accloc_y, $totalCas, $totalFat, $totalSI, $totalMI, $areaSpeed, $posType, $crashType, $DUIInvolved, $drugsInvolved)";
+$SQL = "INSERT INTO `c_crash_data`(`day`, `month`, `year`, `time`, `locid`, `acclocx`, `acclocy`, `total_cas`, `total_fats`, `total_si`, `total_mi`, `area_speed`, `pos_type`, `crash_type`, `dui`, `drugs`) 
+VALUES('$day', '$month', $year, '$time', $location, $accloc_x, $accloc_y, $totalCas, $totalFat, $totalSI, $totalMI, $areaSpeed, $posType, $crashType, $DUIInvolved, $drugsInvolved)";
 
 if(mysqli_query($conn, $SQL)){
 

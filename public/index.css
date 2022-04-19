@@ -4,6 +4,7 @@
   margin: 0;
   font-size: 0.625rem;
   font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
 }
 
 .page {
@@ -43,8 +44,15 @@
 }
 .page .output {
   flex-grow: 1;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
 }
-.page .output td, .page .output th {
+.page .output table {
+  display: block;
+}
+.page .output td,
+.page .output th {
   font-size: 1.5rem;
   text-align: center;
 }
@@ -59,12 +67,14 @@
   font-size: 1rem;
   padding: 0.5rem;
 }
-.page .body input, .page .body select {
+.page .body input,
+.page .body select {
   margin: 0.5rem;
   font-size: 1.5rem;
   padding: 0.4rem;
 }
-.page .body input option, .page .body select option {
+.page .body input option,
+.page .body select option {
   font-size: 1.5rem;
 }
 .page .body-container {
