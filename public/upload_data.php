@@ -1,15 +1,15 @@
 <?php
 include('connect.php');
 
-//check to see if form sent
-if (isset($_POST["submit"])) {
+if (isset($_POST["submit"])) { // Check form was submitted
     echo "pressed submit: ";
-    if ($_FILES['file']['name']) {
+    if ($_FILES['file']['name']) { // Check a file was uploaded
+        // Print filename and server filename
         echo ($_FILES['file']['name']);
         echo "</br>TMP File Name: " . ($_FILES['file']['tmp_name']);
-        $filename = explode(".", $_FILES['file']['name']);
+        $filename = explode(".", $_FILES['file']['name']); // Split filename by .
 
-        //check to see if file name has a csv extension_loaded
+        //check to see if file name has a CSV extension
         if ($filename[1] == 'csv') {
             //create a handler to read through file
             $handle = fopen($_FILES['file']['tmp_name'], "r");
@@ -30,6 +30,7 @@ if (isset($_POST["submit"])) {
                 $posType = getPosType($data);
                 $crashType = getCrashType($data);
 
+                // Convert "yes no" to 1s and 0s for SQL boolean
                 if (
                     null !== mysqli_real_escape_string($conn, $data[28]) &&
                     mysqli_real_escape_string($conn, $data[28]) == "yes"
@@ -54,10 +55,11 @@ if (isset($_POST["submit"])) {
 
                 echo "</br>" . $sql . "</br></br>";
 
+                // Try to insert the SQL statement
                 if ($conn->query($sql) === true) {
-                    echo ("New record added");
+                    echo ("New record added"); // Records added successfully
                 } else {
-                    echo $sql . " " . $conn->error;
+                    echo $sql . " " . $conn->error; // Report error
                 }
             }
             //close the handler
@@ -68,39 +70,43 @@ if (isset($_POST["submit"])) {
     }
 }
 
+// Replace suburb with location ID from database
 function getLocID($data) {
-    global $conn;
+    global $conn; // Get the database conenction
 
+    // Get the suburb from the current line in the CSV file
     $loc = mysqli_real_escape_string($conn, $data[2]);
+    // Select the location-id corresponding with the suburb - return only the first value if there are multiple be error
     $sql = "SELECT `location-id` FROM `c_suburb` WHERE `suburb` LIKE '$loc' ORDER BY `location-id` LIMIT 1";
 
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql); // Return the values from sql
 
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            return $row["location-id"];
+    if (mysqli_num_rows($result) > 0) { // Check value was returned
+        while ($row = mysqli_fetch_assoc($result)) { // Loop through returned values (should be 1)
+            return $row["location-id"]; // Return the location id to insert to database
         }
-    } else {
+    } else { // Location not in database
         echo "Location $loc not found... Adding";
-        insertLoc($data);
+        insertLoc($data); // Add location to database
     }
 }
 
 function insertLoc($data) {
-    global $conn;
-    $suburb = mysqli_real_escape_string($conn, $data[2]);
-    $postcode = mysqli_real_escape_string($conn, $data[3]);
+    global $conn; // Connection variable
+    $suburb = mysqli_real_escape_string($conn, $data[2]); // Get subrub from current line in CSV
+    $postcode = mysqli_real_escape_string($conn, $data[3]); // Get postcode form current line in CSV
     $sql = "INSERT INTO `c_suburb`(`suburb`, `postcode`)
-    VALUES('$suburb', $postcode";
+    VALUES('$suburb', $postcode"; // SQL statement to insert the data
 
-    if(mysqli_query($conn, $sql)){
+    if(mysqli_query($conn, $sql)){ // Add the record
         echo "Records added successfully.";
-        getLocID($data);
+        getLocID($data); // Try to get the location id again
     } else{
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+        echo "ERROR: Could not execute $sql. " . mysqli_error($conn); // Log error
     }
 }
 
+// See comments for getLocID
 function getPosType($data) {
     global $conn;
 
@@ -118,6 +124,7 @@ function getPosType($data) {
     }
 }
 
+// See comments for getLocID
 function getCrashType($data) {
     global $conn;
 

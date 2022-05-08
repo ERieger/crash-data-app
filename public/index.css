@@ -37,6 +37,7 @@
 .page .entry {
   display: flex;
   flex-direction: column;
+  position: sticky;
 }
 .page .entry form {
   display: inherit;

@@ -45,6 +45,7 @@
   .entry {
     display: flex;
     flex-direction: column;
+    position: sticky;
 
     form {
       display: inherit;
