@@ -1,6 +1,11 @@
 <?php
 include('connect.php');
 
+function validate($data) {
+    $data = trim($data);
+    return $data;
+}
+
 if (isset($_POST["submit"])) { // Check form was submitted
     echo "pressed submit: ";
     if ($_FILES['file']['name']) { // Check a file was uploaded
@@ -65,7 +70,11 @@ if (isset($_POST["submit"])) { // Check form was submitted
             //close the handler
             fclose($handle);
             //let the user know they are done
-            echo ("<script>alert('import done')</script>");
+            echo ("<script>
+            alert('import done');
+            window.location.href = \"index.php\";
+            </script>
+            ");
         }
     }
 }
@@ -76,14 +85,14 @@ function getLocID($data) {
 
     // Get the suburb from the current line in the CSV file
     $loc = mysqli_real_escape_string($conn, $data[2]);
-    // Select the location-id corresponding with the suburb - return only the first value if there are multiple be error
-    $sql = "SELECT `location-id` FROM `c_suburb` WHERE `suburb` LIKE '$loc' ORDER BY `location-id` LIMIT 1";
+    // Select the location_id corresponding with the suburb - return only the first value if there are multiple be error
+    $sql = "SELECT `location_id` FROM `c_suburb` WHERE `suburb` LIKE '$loc' ORDER BY `location_id` LIMIT 1";
 
     $result = mysqli_query($conn, $sql); // Return the values from sql
 
     if (mysqli_num_rows($result) > 0) { // Check value was returned
         while ($row = mysqli_fetch_assoc($result)) { // Loop through returned values (should be 1)
-            return $row["location-id"]; // Return the location id to insert to database
+            return $row["location_id"]; // Return the location id to insert to database
         }
     } else { // Location not in database
         echo "Location $loc not found... Adding";
@@ -96,7 +105,7 @@ function insertLoc($data) {
     $suburb = mysqli_real_escape_string($conn, $data[2]); // Get subrub from current line in CSV
     $postcode = mysqli_real_escape_string($conn, $data[3]); // Get postcode form current line in CSV
     $sql = "INSERT INTO `c_suburb`(`suburb`, `postcode`)
-    VALUES('$suburb', $postcode"; // SQL statement to insert the data
+    VALUES('$suburb', $postcode)"; // SQL statement to insert the data
 
     if(mysqli_query($conn, $sql)){ // Add the record
         echo "Records added successfully.";
@@ -111,13 +120,13 @@ function getPosType($data) {
     global $conn;
 
     $pos = mysqli_real_escape_string($conn, $data[15]);
-    $sql = "SELECT `position-type-id` FROM `c_position_type` WHERE `position-type` LIKE '$pos' ORDER BY `position-type-id` LIMIT 1";
+    $sql = "SELECT `position_type_id` FROM `c_position_type` WHERE `position_type` LIKE '$pos' ORDER BY `position_type_id` LIMIT 1";
 
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            return $row["position-type-id"];
+            return $row["position_type_id"];
         }
     } else {
         echo "Location $pos not found...";
@@ -129,13 +138,13 @@ function getCrashType($data) {
     global $conn;
 
     $type = mysqli_real_escape_string($conn, $data[23]);
-    $sql = "SELECT `crash-type-id` FROM `c_crash_type` WHERE `crash-type` LIKE '$type' ORDER BY `crash-type-id` LIMIT 1";
+    $sql = "SELECT `crash_type_id` FROM `c_crash_type` WHERE `crash_type` LIKE '$type' ORDER BY `crash_type_id` LIMIT 1";
 
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            return $row["crash-type-id"];
+            return $row["crash_type_id"];
         }
     } else {
         echo "Location $type not found...";

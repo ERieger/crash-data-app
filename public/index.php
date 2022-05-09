@@ -52,11 +52,11 @@ include('connect.php');
                     <input type="time" name="time" id="time">
                     <select name="location" id="location">
                         <?php
-                        $sql = "SELECT * FROM `c_suburb`  ORDER BY `location-id`";
+                        $sql = "SELECT * FROM `c_suburb`  ORDER BY `location_id`";
                         $result = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
-                                echo ("<option value=\"" . $row["location-id"] . "\">" . $row["suburb"] . "</option>");
+                                echo ("<option value=\"" . $row["location_id"] . "\">" . $row["suburb"] . "</option>");
                             }
                         } else {
                             echo ("no records");
@@ -73,11 +73,11 @@ include('connect.php');
 
                     <select name="posType" id="posType">
                         <?php
-                        $sql = "SELECT * FROM `c_position_type`  ORDER BY `position-type-id`";
+                        $sql = "SELECT * FROM `c_position_type`  ORDER BY `position_type_id`";
                         $result = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
-                                echo ("<option value=\"" . $row["position-type-id"] . "\">" . $row["position-type"] . "</option>");
+                                echo ("<option value=\"" . $row["position_type_id"] . "\">" . $row["position_type"] . "</option>");
                             }
                         } else {
                             echo ("no records");
@@ -87,11 +87,11 @@ include('connect.php');
 
                     <select name="crashType" id="crashType">
                         <?php
-                        $sql = "SELECT * FROM `c_crash_type`  ORDER BY `crash-type-id`";
+                        $sql = "SELECT * FROM `c_crash_type`  ORDER BY `crash_type_id`";
                         $result = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
-                                echo ("<option value=\"" . $row["crash-type-id"] . "\">" . $row["crash-type"] . "</option>");
+                                echo ("<option value=\"" . $row["crash_type_id"] . "\">" . $row["crash_type"] . "</option>");
                             }
                         } else {
                             echo ("no records");
@@ -134,17 +134,36 @@ include('connect.php');
                     </thead>
                     <tbody>
                         <?php
-                        $SQL = "SELECT * FROM `c_crash_data` ORDER BY `year` ASC, `month` ASC, `day` ASC, `time`";
+                        $SQL = "SELECT c_crash_data.crashid, c_crash_data.day, c_crash_data.month, c_crash_data.year, c_crash_data.time, c_suburb.suburb, c_crash_data.acclocx, c_crash_data.acclocy, c_crash_data.total_cas, c_crash_data.total_fats, c_crash_data.total_si, c_crash_data.total_mi,c_crash_data.area_speed, c_position_type.position_type, c_crash_type.crash_type, c_crash_data.dui, c_crash_data.drugs
+                        FROM c_crash_data
+                        INNER JOIN c_suburb ON c_crash_data.locid = c_suburb.location_id
+                        INNER JOIN c_position_type ON c_crash_data.pos_type = c_position_type.position_type_id
+                        INNER JOIN c_crash_type ON c_crash_data.crash_type = c_crash_type.crash_type_id
+                        ORDER BY c_crash_data.crashid ASC";
                         $result = mysqli_query($conn, $SQL);
 
-                        $fields = ["crashid", "day", "month", "year", "time", "locid", "acclocx", "acclocy", "total_cas", "total_fats", "total_si",    "total_mi",    "area_speed", "pos_type", "crash_type", "dui", "drugs"];
+                        $fields = ["crashid", "day", "month", "year", "time", "suburb", "acclocx", "acclocy", "total_cas", "total_fats", "total_si",    "total_mi",    "area_speed", "position_type", "crash_type", "dui", "drugs"];
                         //loop through the result variable and print out its contents if a result was returned
                         if (mysqli_num_rows($result) > 0) {
                             // output data of each row
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo "<tr>";
                                 foreach ($fields as $field) {
-                                    echo "<td>" . $row[$field] . "</td>";
+                                    if ($field == "dui" || $field == "drugs") {
+                                        switch ($row[$field]) {
+                                            case 0:
+                                                echo "<td>no</td>";
+                                                break;
+
+                                            case 1:
+                                                echo "<td>yes</td>";
+                                                break;
+                                        }
+                                    } if($field == "time") {
+                                        echo "<td>" . date('g:ia', strtotime($row[$field])) . "</td>";
+                                    } else {
+                                        echo "<td>" . $row[$field] . "</td>";
+                                    }
                                 }
                                 echo "</tr>";
                             }
