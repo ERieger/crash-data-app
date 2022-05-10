@@ -159,7 +159,7 @@ include('connect.php');
                                                 echo "<td>yes</td>";
                                                 break;
                                         }
-                                    } if($field == "time") {
+                                    } else if ($field == "time") {
                                         echo "<td>" . date('g:ia', strtotime($row[$field])) . "</td>";
                                     } else {
                                         echo "<td>" . $row[$field] . "</td>";
