@@ -1,0 +1,90 @@
+.page {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+  
+    .nav {
+      background-color: $primary;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      // align-content: center;
+  
+      form {
+        margin-left: auto;
+        padding: 1rem;
+  
+        input {
+          font-size: 1rem;
+          color: $light;
+  
+          #file-upload-button {
+            color: $dark;
+          }
+        }
+      }
+  
+      h1 {
+        color: $light;
+      }
+    }
+  
+    .entry {
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+  
+      form {
+        display: inherit;
+        flex-direction: column;
+      }
+    }
+  
+    .output {
+      flex-grow: 1;
+      min-width: 0;
+      max-width: 100%;
+      width: 100%;
+  
+      table {
+        display: block;
+      }
+  
+      td,
+      th {
+        font-size: 1.5rem;
+        text-align: center;
+      }
+    }
+  
+    .body {
+      display: flex;
+    //   h2 {
+    //     font-size: 2.4rem;
+    //     margin: 0.8rem 1.3rem;
+    //   }
+  
+    //   p {
+    //     font-size: 1rem;
+    //     padding: 0.5rem;
+    //   }
+  
+      input,
+      select {
+        margin: 0.5rem;
+        font-size: 1.5rem;
+        padding: 0.4rem;
+  
+        option {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  
+    .body-container {
+      padding: 1rem;
+      margin: 0.5rem;
+    }
+  }

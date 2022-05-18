@@ -24,7 +24,7 @@ include('connect.php');
             <div class="entry body-container">
                 <h2>Data Entry</h2>
                 <form action="crash_process.php" method="POST">
-                    <select name="day" id="day">
+                    <select name="day" id="day" required>
                         <option value="Monday">Monday</option>
                         <option value="Tuesday">Tuesday</option>
                         <option value="Wednesday">Wednesday</option>
@@ -33,13 +33,13 @@ include('connect.php');
                         <option value="Saturday">Saturday</option>
                         <option value="Sunday">Sunday</option>
                     </select>
-                    <select name="month" id="month">
+                    <select name="month" id="month" required>
                         <option value="January">January</option>
                         <option value="February">February</option>
                         <option value="March">March</option>
                         <option value="April">April</option>
                         <option value="May">May</option>
-                        <option value="JuneJuly">JuneJuly</option>
+                        <option value="June">June</option>
                         <option value="July">July</option>
                         <option value="August">August</option>
                         <option value="September">September</option>
@@ -47,10 +47,10 @@ include('connect.php');
                         <option value="November">November</option>
                         <option value="December">December</option>
                     </select>
-                    <input type="number" name="year" id="year" placeholder="year - YYYY">
+                    <input type="number" name="year" id="year" placeholder="year - YYYY" required>
 
-                    <input type="time" name="time" id="time">
-                    <select name="location" id="location">
+                    <input type="time" name="time" id="time" required>
+                    <select name="location" id="location" required>
                         <?php
                         $sql = "SELECT * FROM `c_suburb`  ORDER BY `location_id`";
                         $result = mysqli_query($conn, $sql);
@@ -63,15 +63,15 @@ include('connect.php');
                         }
                         ?>
                     </select>
-                    <input type="number" name="accloc_x" id="accloc_x" min="0" placeholder="Accloc_X">
-                    <input type="number" name="accloc_y" id="accloc_y" min="0" placeholder="Accloc_Y">
-                    <input type="number" name="totalCas" id="totalCas" min="0" placeholder="Total Casualties">
-                    <input type="number" name="totalFat" id="totalFat" min="0" placeholder="Total Fatalities">
-                    <input type="number" name="totalSI" id="totalSI" min="0" placeholder="Total SI">
-                    <input type="number" name="totalMI" id="totalMI" min="0" placeholder="Total MI">
-                    <input type="number" name="areaSpeed" id="areaSpeed" min="0" max="150" placeholder="Area Speed">
+                    <input type="number" name="accloc_x" id="accloc_x" min="0" placeholder="Accloc_X" required>
+                    <input type="number" name="accloc_y" id="accloc_y" min="0" placeholder="Accloc_Y" required>
+                    <input type="number" name="totalCas" id="totalCas" min="0" placeholder="Total Casualties" required>
+                    <input type="number" name="totalFat" id="totalFat" min="0" placeholder="Total Fatalities" required>
+                    <input type="number" name="totalSI" id="totalSI" min="0" placeholder="Total SI" required>
+                    <input type="number" name="totalMI" id="totalMI" min="0" placeholder="Total MI" required>
+                    <input type="number" name="areaSpeed" id="areaSpeed" min="0" max="150" placeholder="Area Speed" required>
 
-                    <select name="posType" id="posType">
+                    <select name="posType" id="posType" required>
                         <?php
                         $sql = "SELECT * FROM `c_position_type`  ORDER BY `position_type_id`";
                         $result = mysqli_query($conn, $sql);
@@ -85,7 +85,7 @@ include('connect.php');
                         ?>
                     </select>
 
-                    <select name="crashType" id="crashType">
+                    <select name="crashType" id="crashType" required>
                         <?php
                         $sql = "SELECT * FROM `c_crash_type`  ORDER BY `crash_type_id`";
                         $result = mysqli_query($conn, $sql);
