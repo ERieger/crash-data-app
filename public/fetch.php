@@ -3,7 +3,7 @@ $sql;
 //fetch.php
 include("connect.php");
 
-$output = '';
+$output = [];
 if (isset($_POST["query"])) {
     $search = mysqli_real_escape_string($conn, $_POST["query"]);
 
@@ -11,15 +11,19 @@ if (isset($_POST["query"])) {
         case 'total':
             $sql = 'SELECT COUNT(crashid) FROM c_crash_data';
             break;
+        case 'speed':
+            $sql = 'SELECT DISTINCT area_speed, COUNT(*) AS "count" FROM `c_crash_data` GROUP BY area_speed';
+            break;
     }
 }
 
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_array($result)) {
-        $output .= $row['COUNT(crashid)'];
+        $output[] = $row;
     }
-    echo $output;
+
+    echo json_encode($output);
 } else {
     echo 'Data Not Found';
 }
