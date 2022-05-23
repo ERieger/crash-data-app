@@ -11,26 +11,43 @@ function load_data(search) {
             query: search
         },
         success: function (data) {
-            console.log(data);
             values = data;
         }
     });
 
-    return values;
+    return JSON.parse(values);
 }
 
 $(document).ready(function () {
-    crashes.innerHTML = load_data('total');
+    crashes.innerHTML = load_data('total')[0]['count'];
 });
 
 const ctx = document.getElementById('areaSpeed').getContext('2d');
 const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: (() => {
+            let data = load_data('speed');
+            let labels = [];
+
+            for (let i = 0; i < data.length; i++) {
+                labels.push(data[i]['area_speed']);
+            }
+
+            return labels;
+        })(),
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            data: (() => {
+                let data = load_data('speed');
+                let dataArr = [];
+
+                for (let i = 0; i < data.length; i++) {
+                    dataArr.push(data[i]['count']);
+                }
+
+                return dataArr;
+            })(),
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -55,6 +72,7 @@ const myChart = new Chart(ctx, {
             y: {
                 beginAtZero: true
             }
-        }
+        },
+        maintainAspectRatio: false
     }
 });

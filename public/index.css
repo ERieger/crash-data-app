@@ -67,6 +67,16 @@
   margin: 0.5rem;
 }
 
+.body {
+  height: 100%;
+  width: 100%;
+}
+
+.areaSpeed {
+  height: 50%;
+  width: 50%;
+}
+
 * {
   font-size: 0.625rem;
   font-family: "Roboto", sans-serif;

@@ -9,10 +9,10 @@ if (isset($_POST["query"])) {
 
     switch ($search) {
         case 'total':
-            $sql = 'SELECT COUNT(crashid) FROM c_crash_data';
+            $sql = 'SELECT COUNT(crashid) AS count FROM c_crash_data';
             break;
         case 'speed':
-            $sql = 'SELECT DISTINCT area_speed, COUNT(*) AS "count" FROM `c_crash_data` GROUP BY area_speed';
+            $sql = 'SELECT DISTINCT area_speed, COUNT(*) AS count FROM `c_crash_data` GROUP BY area_speed';
             break;
     }
 }
