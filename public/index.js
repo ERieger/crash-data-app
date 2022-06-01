@@ -70,7 +70,19 @@ const myChart = new Chart(ctx, {
     options: {
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                title: {
+                    text: '# of Crashes',
+                    display: true,
+                    align: 'center'
+                }
+            },
+            x: {
+                title: {
+                    text: 'Speed of Crash Area',
+                    display: true,
+                    align: 'center'
+                }
             }
         },
         maintainAspectRatio: false
