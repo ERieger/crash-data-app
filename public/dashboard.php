@@ -28,6 +28,12 @@ include('connect.php');
             </div>
         <div class="areaSpeed">
             <canvas id="areaSpeed"></canvas>
+            <select name="x-axis" id="x">
+
+            </select>
+            <select name="y-axis" id="y">
+
+            </select>
         </div>
         </div>
         <script src="index.js"></script>
