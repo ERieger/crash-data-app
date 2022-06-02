@@ -1,6 +1,7 @@
 let crashes = document.getElementById('crashes');
 let x = document.querySelector('#x');
 let y = document.querySelector('#y');
+let selects = document.querySelector('.selects');
 
 function load_data(search) {
     var values;
@@ -33,15 +34,18 @@ function populateDropdown() {
 $(document).ready(function () {
     populateDropdown();
     crashes.innerHTML = load_data('total')[0]['count'];
+    $(selects).change(updateChart($("#x").val(), $("#y").val()));
+
 });
 
-function updateChart() {
+function updateChart(xquery, yquery) {
+    console.log(xquery);
     let ctx = document.getElementById('areaSpeed').getContext('2d');
     let myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: (() => {
-                let data = load_data('speed');
+                let data = load_data(xquery);
                 let labels = [];
     
                 for (let i = 0; i < data.length; i++) {
@@ -53,7 +57,7 @@ function updateChart() {
             datasets: [{
                 label: '# of Votes',
                 data: (() => {
-                    let data = load_data('speed');
+                    let data = load_data(yquery);
                     let dataArr = [];
     
                     for (let i = 0; i < data.length; i++) {
@@ -103,8 +107,3 @@ function updateChart() {
         }
     });
 }
-
-$(x).change(updateChart(x.val()));
-$(y).change(updateChart(y.val()));
-
-

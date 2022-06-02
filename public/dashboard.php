@@ -28,10 +28,10 @@ include('connect.php');
             </div>
         <div class="areaSpeed">
             <canvas id="areaSpeed"></canvas>
-            <select name="x-axis" id="x">
+            <select name="x-axis" id="x" class="selects">
 
             </select>
-            <select name="y-axis" id="y">
+            <select name="y-axis" id="y" class="selects">
 
             </select>
         </div>
