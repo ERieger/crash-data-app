@@ -24,7 +24,7 @@ function load_data(search) {
 }
 
 function populateDropdown() {
-    let fields = ['speed'];
+    let fields = ['crashid', 'day', 'month', 'year', 'time', 'locid', 'total_cas', 'total_fats', 'total_si', 'total_mi', 'area_speed', 'pos_type', 'crash_type', 'dui', 'drugs'];
     fields.forEach((value) => {
         $(x).append(`<option value="${value}">${value}</option>`);
         $(y).append(`<option value="${value}">${value}</option>`);
@@ -34,14 +34,17 @@ function populateDropdown() {
 $(document).ready(function () {
     populateDropdown();
     crashes.innerHTML = load_data('total')[0]['count'];
-    $(selects).change(updateChart($("#x").val(), $("#y").val()));
-
+    bindListener();
 });
+
+function bindListener() {
+    $(selects).change(updateChart($("#x").val(), $("#y").val()));
+}
 
 function updateChart(xquery, yquery) {
     console.log(xquery);
-    let ctx = document.getElementById('areaSpeed').getContext('2d');
-    let myChart = new Chart(ctx, {
+    let chart = document.getElementById('areaSpeed').getContext('2d');
+    let myChart = new Chart(chart, {
         type: 'bar',
         data: {
             labels: (() => {
@@ -49,7 +52,7 @@ function updateChart(xquery, yquery) {
                 let labels = [];
     
                 for (let i = 0; i < data.length; i++) {
-                    labels.push(data[i]['area_speed']);
+                    labels.push(data[i][xquery]);
                 }
     
                 return labels;
@@ -61,7 +64,7 @@ function updateChart(xquery, yquery) {
                     let dataArr = [];
     
                     for (let i = 0; i < data.length; i++) {
-                        dataArr.push(data[i]['count']);
+                        dataArr.push(data[i][yquery]);
                     }
     
                     return dataArr;
@@ -106,4 +109,5 @@ function updateChart(xquery, yquery) {
             maintainAspectRatio: false
         }
     });
+    bindListener();
 }

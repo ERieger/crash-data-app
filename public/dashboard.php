@@ -2,6 +2,7 @@
 include('connect.php');
 ?>
 
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -39,5 +40,4 @@ include('connect.php');
         <script src="index.js"></script>
     </div>
 </body>
-
 </html>
