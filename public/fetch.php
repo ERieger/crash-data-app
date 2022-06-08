@@ -15,34 +15,29 @@ if (isset($_POST["query"])) {
             $sql = 'SELECT crashid FROM c_crash_data';
             break;
         case 'day':
-            $sql = 'SELECT "day" FROM c_cras_data';
+            $sql = 'SELECT DISTINCT day, COUNT(day) AS count
+            FROM c_crash_data GROUP BY day
+            ORDER BY day ASC';
             break;
         case 'month':
-            $sql = 'SELECT "month" FROM c_crash_data';
+            $sql = 'SELECT DISTINCT month, COUNT(month) AS count
+            FROM c_crash_data GROUP BY month
+            ORDER BY month ASC';
             break;
         case 'year':
-            $sql = 'SELECT "year" FROM c_crash_data';
+            $sql = 'SELECT DISTINCT year, COUNT(year) AS count
+            FROM c_crash_data GROUP BY year
+            ORDER BY year ASC';
             break;
         case 'time':
-            $sql = 'SELECT "time" FROM c_crash_data';
+            $sql = 'SELECT DISTINCT time, COUNT(time) AS count
+            FROM c_crash_data GROUP BY time
+            ORDER BY time ASC';
             break;
         case 'locid':
-            $sql = 'SELECT locid FROM c_crash_data';
-            break;
-        case 'total_cas':
-            $sql = 'SELECT total_cas FROM c_crash_data';
-            break;
-        case 'total_fats':
-            $sql = 'SELECT total_fats FROM c_crash_data';
-            break;
-        case 'total_si':
-            $sql = 'SELECT total_si FROM c_crash_data';
-            break;
-        case 'area_speed':
-            $sql = 'SELECT area_speed FROM c_crash_data';
-            break;
-        case 'pos_type':
-            $sql = 'SELECT pos_type FROM c_crash_data';
+            $sql = 'SELECT DISTINCT locid, COUNT(locid) AS count
+            FROM c_crash_data WHERE COUNT(locid) > 5 GROUP BY locid
+            ORDER BY locid ASC';
             break;
         case 'crash_type':
             $sql = 'SELECT crash_type FROM c_crash_data';
@@ -53,9 +48,6 @@ if (isset($_POST["query"])) {
         case 'drugs':
             $sql = 'SELECT drugs FROM c_crash_data';
             break;
-        // case 'area_speed':
-        //     $sql = 'SELECT DISTINCT area_speed, COUNT(*) AS count FROM `c_crash_data` GROUP BY area_speed';
-        //     break;
     }
 }
 
@@ -69,4 +61,3 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     echo 'Data Not Found';
 }
-?>
