@@ -1,10 +1,16 @@
-let crashes = document.getElementById('crashes');
-let x = document.querySelector('#x');
-let myChart;
-let chartArea = document.getElementById('chart').getContext('2d');
+const chartArea = document.getElementById('chart').getContext('2d');
 let chartDefined = false;
+let myChart;
+const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const d = new Date();
+let day = weekday[d.getDay()];
 
-function load_data(search) {
+function load_data(search, filterKey) {
+    let obj = JSON.stringify({
+        query: search,
+        filter: filterKey
+    });
+
     var values;
     // console.log(search);
     $.ajax({
@@ -12,28 +18,31 @@ function load_data(search) {
         url: "fetch.php",
         method: "POST",
         data: {
-            query: search
+            query: obj
         },
         success: function (data) {
             // console.log(JSON.parse(data));
-            // console.log(values);
+            // console.log(data);
             values = data;
+            // console.log(values);
         }
     });
     return JSON.parse(values);
 }
 
 function populateDropdown() {
-    let xfields = ['day', 'month', 'year', 'time','locid', 'area_speed', 'pos_type', 'crash_type'];
+    let xfields = ['day', 'month', 'year', 'time', 'locid', 'area_speed', 'pos_type', 'crash_type'];
 
     xfields.forEach((value) => {
-        $(x).append(`<option value="${value}">${value}</option>`);
+        $('#x').append(`<option value="${value}">${value}</option>`);
     });
 }
 
 $(document).ready(function () {
     populateDropdown();
-    crashes.innerHTML = load_data('total')[0]['count'];
+    $('#crashes').html(load_data('total', null)[0]['count']);
+    $('#otd').html(load_data('otd', day)[0]['count']);
+
 });
 
 function submit() {
@@ -41,15 +50,12 @@ function submit() {
 }
 
 function updateChart(xquery) {
-    console.log(xquery);
-    console.log(myChart);
-
     if (chartDefined) {
         myChart.destroy();
     }
 
     let data = (() => {
-        let data = load_data(xquery);
+        let data = load_data(xquery, null);
         let labels = [];
         let dataArr = [];
 

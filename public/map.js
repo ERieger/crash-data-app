@@ -38,14 +38,14 @@ AUTHORITY["EPSG","4326"]]`;
 var data = {
     max: 8,
     data: (() => {
-        let accloc = load_data('accloc');
+        let accloc = load_data('accloc', null);
         let dataArr = [];
         let inc = 0;
 
         accloc.forEach(value => {
             if (inc < 50) {
                 let prod = proj4(source, dest, [parseInt(value.acclocx), parseInt(value.acclocy)]);
-                console.log(prod);
+                // console.log(prod);
                 // transforming point coordinates
                 let element = {
                     lat: prod[1],
@@ -58,7 +58,7 @@ var data = {
             }
         });
 
-        console.log(dataArr);
+        // console.log(dataArr);
         return dataArr;
     })()
 };

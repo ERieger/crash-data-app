@@ -17,36 +17,40 @@ include('connect.php');
 </head>
 
 <body>
-    <div class="page">
+    <div class="page dashboard">
         <div class="nav">
             <h1>Road Crash Dashboard</h1>
-
+            
         </div>
         <div class="body">
             <div class="totals">
                 <h1>Totals</h1>
                 <span>
-                    <p>Total Crashes</p>
+                    <h3>Total Crashes</h3>
                     <p id="crashes"></p>
                 </span>
+                <span>
+                    <h3>On this day...</h3>
+                    <p id="otd"></p>
+                </span>
             </div>
-            <div class="chart">
+            <div class="chart-area">
                 <span>
                     <select name="x-axis" id="x" class="selects"></select>
                     <button class="btn btn-primary-outline-rounded" onclick="submit()">Submit</button>
                 </span>
-                <canvas id="chart"></canvas>
+                <div class="chart">
+                    <canvas id="chart"></canvas>
+                </div>
             </div>
-            <!-- <div class="filters">
-            <h1>Select Filters</h1>
-        </div> -->
-
         </div>
-        <div id="map"></div>
-
-        <script src="./heatmap.js"></script>
-        <script src="./leaflet-heatmap.js"></script>
-        <script src="./proj4.js"></script>
+        <div class="map-area">
+            <div id="map"></div>
+        </div>
+        
+        <script src="./packages/heatmap.js"></script>
+        <script src="./packages/leaflet-heatmap.js"></script>
+        <script src="./packages/proj4.js"></script>
         <script src="./index.js"></script>
         <script src="./map.js"></script>
     </div>
