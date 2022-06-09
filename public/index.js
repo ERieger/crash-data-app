@@ -5,6 +5,13 @@ const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday
 const d = new Date();
 let day = weekday[d.getDay()];
 
+$(document).ready(function () {
+    populateDropdown();
+    $('#crashes').html(load_data('total', null)[0]['count']);
+    $('#otd').html(load_data('otd', day)[0]['count']);
+    updateChart('day');
+});
+
 function load_data(search, filterKey) {
     let obj = JSON.stringify({
         query: search,
@@ -37,13 +44,6 @@ function populateDropdown() {
         $('#x').append(`<option value="${value}">${value}</option>`);
     });
 }
-
-$(document).ready(function () {
-    populateDropdown();
-    $('#crashes').html(load_data('total', null)[0]['count']);
-    $('#otd').html(load_data('otd', day)[0]['count']);
-
-});
 
 function submit() {
     updateChart($("#x").val());
