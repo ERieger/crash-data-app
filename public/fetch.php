@@ -36,17 +36,36 @@ if (isset($_POST["query"])) {
             break;
         case 'locid':
             $sql = 'SELECT DISTINCT locid, COUNT(locid) AS count
-            FROM c_crash_data WHERE COUNT(locid) > 5 GROUP BY locid
+            FROM c_crash_data GROUP BY locid
             ORDER BY locid ASC';
             break;
         case 'crash_type':
             $sql = 'SELECT crash_type FROM c_crash_data';
             break;
+        case 'area_speed':
+            $sql = 'SELECT DISTINCT area_speed, COUNT(area_speed) AS count
+            FROM c_crash_data GROUP BY area_speed
+            ORDER BY area_speed ASC';
+            break;
+        case 'pos_type':
+            $sql = 'SELECT DISTINCT pos_type, COUNT(pos_type) AS count
+            FROM c_crash_data GROUP BY pos_type
+            ORDER BY pos_type ASC';
+            break;
+        case 'crash_type';
+            $sql = 'SELECT DISTINCT crash_type, COUNT(crash_type) AS count
+            FROM c_crash_data GROUP BY crash_type
+            ORDER BY crash_type ASC';
+            break;
         case 'dui':
-            $sql = 'SELECT dui FROM c_crash_data';
+            $sql = 'SELECT DISTINCT dui, COUNT(dui) AS count
+            FROM c_crash_data GROUP BY dui
+            ORDER BY dui ASC';
             break;
         case 'drugs':
-            $sql = 'SELECT drugs FROM c_crash_data';
+            $sql = 'SELECT DISTINCT drugs, COUNT(drugs) AS count
+            FROM c_crash_data GROUP BY drugs
+            ORDER BY drugs ASC';
             break;
     }
 }

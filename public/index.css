@@ -76,6 +76,10 @@
   width: 50%;
   height: 50%;
 }
+.chart span {
+  display: flex;
+  flex-direction: row;
+}
 
 * {
   font-size: 0.625rem;

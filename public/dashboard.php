@@ -27,13 +27,21 @@ include('connect.php');
                     <p id="crashes"></p>
                 </span>
             </div>
-        <div class="chart">
-            <canvas id="chart"></canvas>
-            <select name="x-axis" id="x" class="selects"></select>
-            <button class="btn btn-primary-outline-rounded" onclick="submit()">Submit</button>
-        </div>
+            <div class="chart">
+                <span>
+                    <select name="x-axis" id="x" class="selects"></select>
+                    <button class="btn btn-primary-outline-rounded" onclick="submit()">Submit</button>
+                </span>
+                <canvas id="chart"></canvas>
+            </div>
+            <!-- <div class="filters">
+            <h1>Select Filters</h1>
+        </div> -->
+
+        
         </div>
         <script src="index.js"></script>
     </div>
 </body>
+
 </html>

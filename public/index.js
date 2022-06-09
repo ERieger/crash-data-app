@@ -59,6 +59,7 @@ function updateChart(xquery) {
         }
 
         return {
+            field: xquery,
             labels: labels,
             dataArr: dataArr
         };
@@ -69,7 +70,7 @@ function updateChart(xquery) {
         data: {
             labels: data.labels,
             datasets: [{
-                label: '# of Votes',
+                label: 'Count of crashes',
                 data: data.dataArr,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -95,14 +96,14 @@ function updateChart(xquery) {
                 y: {
                     beginAtZero: true,
                     title: {
-                        text: '# of Crashes',
+                        text: `Count of ${data.field}`,
                         display: true,
                         align: 'center'
                     }
                 },
                 x: {
                     title: {
-                        text: 'Speed of Crash Area',
+                        text: data.field,
                         display: true,
                         align: 'center'
                     }
