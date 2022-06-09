@@ -16,8 +16,8 @@ function load_data(search) {
         },
         success: function (data) {
             // console.log(JSON.parse(data));
+            // console.log(values);
             values = data;
-            console.log(values);
         }
     });
     return JSON.parse(values);

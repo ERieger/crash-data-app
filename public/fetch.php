@@ -67,6 +67,9 @@ if (isset($_POST["query"])) {
             FROM c_crash_data GROUP BY drugs
             ORDER BY drugs ASC';
             break;
+        case 'accloc':
+            $sql = 'SELECT acclocx, acclocy FROM c_crash_data';
+            break;
     }
 }
 

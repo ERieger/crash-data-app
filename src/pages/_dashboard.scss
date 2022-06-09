@@ -4,11 +4,15 @@
 }
 
 .chart {
-    width: 50%;
-    height: 50%;
+    width: 75%;
+    height: 80%;
 
     span {
         display: flex;
         flex-direction: row;
     }
+}
+
+#map {
+    height: 100rem;
 }
