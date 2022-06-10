@@ -87,7 +87,14 @@ var cfg = {
     // which field name in your data represents the longitude - default "lng"
     lngField: 'lng',
     // which field name in your data represents the data value - default "value"
-    valueField: 'count'
+    valueField: 'count',
+    gradient: {
+    // enter n keys between 0 and 1 here
+    // for gradient color customization
+    '.5': 'blue',
+    '.8': 'red',
+    '.95': 'white'
+  }
 };
 
 
