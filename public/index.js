@@ -1,18 +1,22 @@
-const chartArea = document.getElementById('chart').getContext('2d');
+// Define global variables
+const chartArea = document.getElementById('chart').getContext('2d'); // Reference to chart
 let chartDefined = false;
 let myChart;
 const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const d = new Date();
-let day = weekday[d.getDay()];
+let day = weekday[d.getDay()]; // Get current day as string
 
+// Run when the page loads
 $(document).ready(function () {
-    populateDropdown();
-    $('#crashes').html(load_data('total', null)[0]['count']);
-    $('#otd').html(load_data('otd', day)[0]['count']);
-    updateChart('day');
+    populateDropdown(); // Call function to populate dropdowns
+    $('#crashes').html(load_data('total', null)[0]['count']); // Display total
+    $('#otd').html(load_data('otd', day)[0]['count']); // Count total on this day
+    updateChart('day'); // Call chart update function with 'day' option
 });
 
+// Define function to load data - accept search query and filter key
 function load_data(search, filterKey) {
+    // Create search query object to parse to php
     let obj = JSON.stringify({
         query: search,
         filter: filterKey
@@ -50,31 +54,41 @@ function submit() {
 }
 
 function updateChart(xquery) {
+    // Destory chart if already defined
+    // Fixes a chart.js error when updating graph
     if (chartDefined) {
         myChart.destroy();
     }
 
+    // Define chart data
+    // Uses arrow function to avoid scope issue
+    // Also minimises extra functions
     let data = (() => {
-        let data = load_data(xquery, null);
+        let data = load_data(xquery, null); // Get data
+        // Define data and labels array
         let labels = [];
         let dataArr = [];
 
+        // Loop through returned data
         for (let i = 0; i < data.length; i++) {
-            labels.push(data[i][xquery]);
-            dataArr.push(data[i]['count']);
+            labels.push(data[i][xquery]); // Label name
+            dataArr.push(data[i]['count']); // Push data value
         }
 
+        // Return object with all values
         return {
-            field: xquery,
-            labels: labels,
-            dataArr: dataArr
+            field: xquery, // Chart name
+            labels: labels, // Chart labels
+            dataArr: dataArr // Chart data
         };
     })();
 
+    // Define chart config
+    // Also creates new chart instance
     myChart = new Chart(chartArea, {
         type: 'bar',
         data: {
-            labels: data.labels,
+            labels: data.labels, // Reference to data object
             datasets: [{
                 label: 'Count of crashes',
                 data: data.dataArr,
@@ -99,6 +113,7 @@ function updateChart(xquery) {
         },
         options: {
             scales: {
+                // Title axes
                 y: {
                     beginAtZero: true,
                     title: {
@@ -119,5 +134,13 @@ function updateChart(xquery) {
         }
     });
 
+    /*
+    chartDefined is a global variable
+    on page load it is false
+    after the chart has been made for the first time
+    it becomes true
+    if chart is defined then it is destroyed
+    before the data is updated
+    */
     chartDefined = true;
 }
