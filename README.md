@@ -2,11 +2,11 @@
 ## About
 This is an all in one web based application for working with [South Australia road crash data](https://data.sa.gov.au/data/dataset/road-crash-data). The app includes a form page for inserting new data and a dashboard page for basic statistical analysis.
 
-The project was inteded as a skills development task for year 12 digital technologies.
+The project was inteded as a skills development task for year 12 digital technologies. It uses a combination of PHP and JavaScript.
 ## Dependencies
 ### External
 * A valid php installation or server
-* A valid SQL database - either MariaDB or MySQL must include correct tables
+* A valid SQL database - either MariaDB or MySQL must include correct tables (have fun reverse engineering that)
 * A file named connect.php in the root of the public folder (format detailed later)
 * Ajax jquery - uses google CDN
 * Chart js - uses jsdelivr
